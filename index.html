@@ -108,12 +108,10 @@
     <div id="visitor-count">Contagem de Presenças: <span id="count">0</span></div>
   </div>
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    // Importando as funções necessárias do Firebase
-    import { initializeApp } from "firebase/app";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "firebase/firestore"; 
-
+  <!-- Firebase SDK via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+  <script>
     // Configurações do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBUSxGR1Wgr8PnxVm6PSgJ5dZjULoRtMYE",
@@ -126,15 +124,15 @@
     };
 
     // Inicializa o Firebase e o Firestore
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
     // Função para registrar um visitante
     async function registerVisitor(username) {
       try {
-        await addDoc(collection(db, "visitantes"), {
+        await db.collection("visitantes").add({
           username: username,
-          timestamp: serverTimestamp()
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         console.log("Visitante registrado!");
         updateVisitorCount();
@@ -145,11 +143,11 @@
 
     // Função para atualizar a contagem de visitantes
     async function updateVisitorCount() {
-      const querySnapshot = await getDocs(collection(db, "visitantes"));
+      const querySnapshot = await db.collection("visitantes").get();
       document.getElementById('count').innerText = querySnapshot.size;
     }
 
-    // Função chamada ao clicar no botão "Confirmar Presença"
+    // Evento de clique no botão "Confirmar Presença"
     document.getElementById('confirm-button').addEventListener('click', async () => {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
