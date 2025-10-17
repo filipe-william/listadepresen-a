@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmação de presença - 15 anos da Júlia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f7d9f7, #fce4ec);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 750px;
+      background: white;
+      padding: 30px;
+      margin: 40px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #c2185b;
+    }
+    details {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fdfdfd;
+    }
+    summary {
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #880e4f;
+    }
+    .membro {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+    }
+    .membro label {
+      margin-left: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 1.2em;
+      background: #c2185b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #880e4f;
+    }
+    #visitor-count {
+      margin-top: 20px;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Confirmação de presença<br>15 anos da Júlia</h1>
+
+    <!-- Lista de famílias -->
+    <details>
+      <summary>Aldeci e familia</summary>
+      <div class="membro"><input type="checkbox" data-nome="Aldeci"><label>Aldeci</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Lais"><label>Lais</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Lara"><label>Lara</label></div>
+    </details>
+
+    <details>
+      <summary>Família Oliveira</summary>
+      <div class="membro"><input type="checkbox" data-nome="Fernanda Oliveira"><label>Fernanda Oliveira</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Pedro Oliveira"><label>Pedro Oliveira</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Joana Oliveira"><label>Joana Oliveira</label></div>
+    </details>
+
+    <details>
+      <summary>Família Souza</summary>
+      <div class="membro"><input type="checkbox" data-nome="Ricardo Souza"><label>Ricardo Souza</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Beatriz Souza"><label>Beatriz Souza</label></div>
+    </details>
+
+    <details>
+      <summary>Família Costa</summary>
+      <div class="membro"><input type="checkbox" data-nome="André Costa"><label>André Costa</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Carla Costa"><label>Carla Costa</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Miguel Costa"><label>Miguel Costa</label></div>
+      <div class="membro"><input type="checkbox" data-nome="Luiza Costa"><label>Luiza Costa</label></div>
+    </details>
+
+    <button id="confirm-button">Confirmar Presença</button>
+    <div id="visitor-count">Contagem de Presenças: <span id="count">0</span></div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Importando as funções necessárias do Firebase
+    import { initializeApp } from "firebase/app";
+    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "firebase/firestore"; 
+
+    // Configurações do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBUSxGR1Wgr8PnxVm6PSgJ5dZjULoRtMYE",
+      authDomain: "lista-de-presenca-95526.firebaseapp.com",
+      projectId: "lista-de-presenca-95526",
+      storageBucket: "lista-de-presenca-95526.appspot.com",
+      messagingSenderId: "879181560997",
+      appId: "1:879181560997:web:5f6e176691d01372f8a14c",
+      measurementId: "G-E64GD1QGJ2"
+    };
+
+    // Inicializa o Firebase e o Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Função para registrar um visitante
+    async function registerVisitor(username) {
+      try {
+        await addDoc(collection(db, "visitantes"), {
+          username: username,
+          timestamp: serverTimestamp()
+        });
+        console.log("Visitante registrado!");
+        updateVisitorCount();
+      } catch (error) {
+        console.error("Erro ao registrar visitante: ", error);
+      }
+    }
+
+    // Função para atualizar a contagem de visitantes
+    async function updateVisitorCount() {
+      const querySnapshot = await getDocs(collection(db, "visitantes"));
+      document.getElementById('count').innerText = querySnapshot.size;
+    }
+
+    // Função chamada ao clicar no botão "Confirmar Presença"
+    document.getElementById('confirm-button').addEventListener('click', async () => {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+      for (let cb of checkboxes) {
+        const username = cb.getAttribute("data-nome");
+        if (cb.checked) {
+          await registerVisitor(username);
+        }
+      }
+
+      alert("Presenças confirmadas foram adicionadas ao banco de dados!");
+    });
+
+    // Atualiza a contagem de visitantes ao carregar a página
+    window.onload = updateVisitorCount;
+  </script>
+</body>
+</html>
