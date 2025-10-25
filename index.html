@@ -1,511 +1,510 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Confirmação de presença - 15 anos da Júlia</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom right, #f7d9f7, #fce4ec);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-        .container {
-            width: 90%;
-            max-width: 750px;
-            background: white;
-            padding: 30px;
-            margin: 40px 0;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #c2185b;
-        }
-        details {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            background: #fdfdfd;
-        }
-        summary {
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #880e4f;
-        }
-        .membro {
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-        }
-        .membro label {
-            margin-left: 8px;
-        }
-        button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 1.2em;
-            background: #c2185b;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #880e4f;
-        }
-        #visitor-count {
-            margin-top: 20px;
-            font-size: 1.2em;
-            text-align: center;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Confirmação - Aniversário da Júlia</title>
+<style>
+  :root{
+    --bg: #fff4fb;
+    --card:#fff;
+    --accent:#ff6fb8;
+    --accent-2:#ff9ccf;
+    --muted:#7a7a7a;
+    --shadow: 0 6px 18px rgba(255,111,184,0.12);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  body{ background: linear-gradient(180deg,var(--bg),#ffeef9); margin:0; padding:20px; color:#333; }
+  .wrap{ max-width:980px; margin:12px auto; }
+  header{ display:flex; align-items:center; gap:16px; }
+  .logo{ width:72px; height:72px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:white; font-weight:700; box-shadow:var(--shadow); }
+  h1{ margin:0; font-size:20px; }
+  p.lead{ margin:6px 0 20px 0; color:var(--muted); }
+  .card{ background:var(--card); border-radius:14px; padding:18px; box-shadow:var(--shadow); }
+  .searchRow{ display:flex; gap:10px; margin-bottom:12px; }
+  input[type="search"]{ flex:1; padding:12px 14px; border-radius:10px; border:1px solid rgba(0,0,0,0.08); font-size:15px; }
+  .list{ margin-top:8px; max-height:360px; overflow:auto; padding-right:6px; }
+  .item{ display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:10px; margin-bottom:8px; border:1px solid rgba(0,0,0,0.03); }
+  .meta{ font-size:13px; color:var(--muted); }
+  .confirmBox{ display:flex; gap:8px; align-items:center; }
+  .btn{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; padding:8px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:600; }
+  .msg{ margin-top:10px; padding:10px; border-radius:10px; color:#fff; background:linear-gradient(90deg,#28a745,#2ecc71); display:inline-block; }
+  .admin{ margin-top:18px; display:flex; gap:8px; align-items:center; }
+  .admin input{ padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); }
+  .adminView{ margin-top:12px; display:none; }
+  table{ width:100%; border-collapse:collapse; margin-top:8px; }
+  th,td{ text-align:left; padding:10px; border-bottom:1px solid rgba(0,0,0,0.04); }
+  .badge{ padding:6px 8px; border-radius:8px; background:linear-gradient(90deg,#fff0f9,#ffe6f6); color:var(--accent); font-weight:700; }
+  .small{ font-size:13px; color:var(--muted); }
+  .confirmSection{ margin-top:16px; display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; }
+  .confirmBtn{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; padding:14px 24px; border-radius:10px; border:0; cursor:pointer; font-weight:700; font-size:16px; box-shadow:var(--shadow); }
+  .confirmBtn:disabled{ opacity:0.5; cursor:not-allowed; }
+  .counter{ font-size:15px; color:var(--muted); }
+  .counter strong{ color:var(--accent); font-size:18px; }
+  footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+  @media(max-width:600px){ .searchRow{ flex-direction:column; } .logo{ width:60px;height:60px; } }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Confirmação de presença<br>15 anos da Júlia</h1>
+  <div class="wrap">
+    <header>
+      <div class="logo">J</div>
+      <div>
+        <h1>Confirmação de presença — Júlia 🎀</h1>
+        <p class="lead">Procure seu nome, marque a caixinha e confirme sua presença. Simples e direto.</p>
+      </div>
+    </header>
 
-        <!-- Lista de famílias -->
-        <details>
-            <summary>Aldeci e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Aldeci"><label>Aldeci</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Laís"><label>Laís</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Lara"><label>Lara</label></div>
-        </details>
+    <section class="card" id="app">
+      <div class="searchRow">
+        <input id="search" type="search" placeholder="Digite seu nome (ex.: Ana, Filipe)..." autocomplete="off" />
+        <button class="btn" id="clearBtn" type="button">Limpar</button>
+      </div>
 
-        <details>
-            <summary>Analice e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Analice"><label>Analice</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ana JúlIa"><label>Ana JúlIa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gustavo"><label>Gustavo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Mailson"><label>Mailson</label></div>
-        </details>
+      <div class="list" id="list"></div>
 
-        <details>
-            <summary>André e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="André"><label>André</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabriela"><label>Gabriela</label></div>
-        </details>
+      <div class="confirmSection">
+        <button class="confirmBtn" id="confirmBtn" disabled>Confirmar presença</button>
+        <div class="counter" id="counter">Nenhum nome selecionado</div>
+      </div>
 
-        <details>
-            <summary>Andréia Lima</summary>
-            <div class="membro"><input type="checkbox" data-nome="Andréia"><label>Andréia</label></div>
-        </details>
+      <div id="messageArea"></div>
 
-        <details>
-            <summary>Ane Daniele e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Ane"><label>Ane</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ana Luíza"><label>Ana Luíza</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Duda"><label>Duda</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rogério"><label>Rogério</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Valentina"><label>Valentina</label></div>
-        </details>
+      <div class="admin card" style="margin-top:16px;">
+        <input id="adminPass" type="password" placeholder="Senha do administrador" />
+        <button id="adminBtn" class="btn">Entrar (Admin)</button>
+        <button id="openConsoleBtn" class="btn" style="background:transparent;color:var(--accent);border:1px solid var(--accent);">Ver no Firebase</button>
+      </div>
 
-        <details>
-            <summary>Branca e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Branca"><label>Branca</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Josimar"><label>Josimar</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Vô"><label>Vô</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rian"><label>Rian</label></div>
-        </details>
+      <div class="adminView card" id="adminView">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div><strong>Lista de confirmados</strong> <span class="small"> (em tempo real)</span></div>
+          <div><button id="logoutAdmin" class="btn" style="background:transparent;color:var(--accent);border:1px solid var(--accent);">Sair</button></div>
+        </div>
+        <table id="confirmedTable">
+          <thead><tr><th>Nome</th><th>Família / Grupo</th><th>Quando</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
 
-        <details>
-            <summary>Carol e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Antônio Marcos"><label>Antônio Marcos</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Carol"><label>Carol</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabi"><label>Gabi</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Stela"><label>Stela</label></div>
-        </details>
+    <footer>
+      Criado por Felps • Aniversário da Júlia
+    </footer>
+  </div>
 
-        <details>
-            <summary>Cirley e Willian</summary>
-            <div class="membro"><input type="checkbox" data-nome="Cirley"><label>Cirley</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Willian Daniel"><label>Willian Daniel</label></div>
-        </details>
+  <script type="module">
+    const firebaseConfig = {
+      apiKey: "AIzaSyBzFOEslYaHMU-4qA9KkVDVN34iGnSLDs8",
+      authDomain: "confirmar-presenca-b89b4.firebaseapp.com",
+      projectId: "confirmar-presenca-b89b4",
+      storageBucket: "confirmar-presenca-b89b4.firebasestorage.app",
+      messagingSenderId: "695843772901",
+      appId: "1:695843772901:web:9c5208f3b076a52224370c",
+      measurementId: "G-0ZGXW8XXN7"
+    };
 
-        <details>
-            <summary>Comadre Ana e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Ana"><label>Ana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Luiz Carlos"><label>Luiz Carlos</label></div>
-        </details>
+    const ADMIN_PASSWORD = "aniversário da Júlia";
 
-        <details>
-            <summary>Comadre Jô e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Antônio"><label>Antônio</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Jô"><label>Jô</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rafael"><label>Rafael</label></div>
-        </details>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-        <details>
-            <summary>Comadre Marta e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Breno"><label>Breno</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Magelo"><label>Magelo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Marta"><label>Marta</label></div>
-        </details>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        <details>
-            <summary>Dona Maria e Sr Carlinhos</summary>
-            <div class="membro"><input type="checkbox" data-nome="Dona Maria"><label>Dona Maria</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Carlinhos"><label>Carlinhos</label></div>
-        </details>
+    const people = [
+      { family: "Aldeci e família", name: "Aldeci" },
+      { family: "Aldeci e família", name: "Laís" },
+      { family: "Aldeci e família", name: "Lara" },
+      { family: "Analice e família", name: "Analice" },
+      { family: "Analice e família", name: "Ana Júlia" },
+      { family: "Analice e família", name: "Gustavo" },
+      { family: "Analice e família", name: "Mailson" },
+      { family: "André e família", name: "André" },
+      { family: "André e família", name: "Gabriela" },
+      { family: "Andréia Lima", name: "Andréia" },
+      { family: "Ane Daniele e família", name: "Ane" },
+      { family: "Ane Daniele e família", name: "Ana Luíza" },
+      { family: "Ane Daniele e família", name: "Duda" },
+      { family: "Ane Daniele e família", name: "Rogério" },
+      { family: "Ane Daniele e família", name: "Valentina" },
+      { family: "Branca e família", name: "Branca" },
+      { family: "Branca e família", name: "Josimar" },
+      { family: "Branca e família", name: "Vô" },
+      { family: "Branca e família", name: "Rian" },
+      { family: "Carol e família", name: "Antônio Marcos" },
+      { family: "Carol e família", name: "Carol" },
+      { family: "Carol e família", name: "Gabi" },
+      { family: "Carol e família", name: "Stela" },
+      { family: "Cirley e Willian", name: "Cirley" },
+      { family: "Cirley e Willian", name: "Willian Daniel" },
+      { family: "Comadre Ana e família", name: "Ana" },
+      { family: "Comadre Ana e família", name: "Luiz Carlos" },
+      { family: "Comadre Jô e família", name: "Antônio" },
+      { family: "Comadre Jô e família", name: "Jô" },
+      { family: "Comadre Jô e família", name: "Rafael" },
+      { family: "Comadre Marta e família", name: "Breno" },
+      { family: "Comadre Marta e família", name: "Magelo" },
+      { family: "Comadre Marta e família", name: "Marta" },
+      { family: "Dona Maria e Sr Carlinhos", name: "Dona Maria" },
+      { family: "Dona Maria e Sr Carlinhos", name: "Carlinhos" },
+      { family: "Dona Rosa e Waldenia", name: "Dona Rosa" },
+      { family: "Dona Rosa e Waldenia", name: "Waldenia" },
+      { family: "Duda e família", name: "Ana Carolina" },
+      { family: "Duda e família", name: "Duda" },
+      { family: "Duda e família", name: "Fabiana Ariai" },
+      { family: "Duda e família", name: "Maria Helena" },
+      { family: "Duda e família", name: "Maria Luiza" },
+      { family: "Duda e família", name: "Petre Ariani" },
+      { family: "Elza e Zé", name: "Elza" },
+      { family: "Elza e Zé", name: "Zé" },
+      { family: "Eleida e família", name: "Cláudio" },
+      { family: "Eleida e família", name: "Eleida" },
+      { family: "Eleida e família", name: "Sofhia" },
+      { family: "Eleida e família", name: "Victória" },
+      { family: "Flávia e família", name: "Cibely" },
+      { family: "Flávia e família", name: "Flávia" },
+      { family: "Flávia e família", name: "Giovana" },
+      { family: "Flávia e família", name: "Márcio" },
+      { family: "Gabriel Gabigol", name: "Gabriel" },
+      { family: "Glacélia e família", name: "Glacélia" },
+      { family: "Glacélia e família", name: "Guilherme" },
+      { family: "Glacélia e família", name: "Wagner" },
+      { family: "Jéssica e família", name: "Jéssica" },
+      { family: "Jéssica e família", name: "Rafael" },
+      { family: "Jéssica e família", name: "Gabi" },
+      { family: "João Matheus e família", name: "João" },
+      { family: "João Matheus e família", name: "Letícia" },
+      { family: "Joyce e família", name: "Joyce" },
+      { family: "Joyce e família", name: "Diego" },
+      { family: "Joyce e família", name: "João Pedro" },
+      { family: "Jeniffer e família", name: "Filipe" },
+      { family: "Jeniffer e família", name: "Jeniffer" },
+      { family: "Jeniffer e família", name: "Luísa" },
+      { family: "Jeniffer e família", name: "Tiago" },
+      { family: "Jucelina e Júlio", name: "Jucelina" },
+      { family: "Jucelina e Júlio", name: "Júlio" },
+      { family: "Juliana e família", name: "Dimitri" },
+      { family: "Juliana e família", name: "Heitor" },
+      { family: "Juliana e família", name: "Helena" },
+      { family: "Juliana e família", name: "Juliana" },
+      { family: "Juliana e família", name: "Panteles" },
+      { family: "Juliana e família", name: "Marina" },
+      { family: "Karine e família", name: "Geraldinho" },
+      { family: "Karine e família", name: "Gustavo" },
+      { family: "Karine e família", name: "Karine" },
+      { family: "Karine e família", name: "Luísa" },
+      { family: "Leidiane e Juju", name: "Juju" },
+      { family: "Leidiane e Juju", name: "Leidiane" },
+      { family: "Leila e família", name: "Donizete" },
+      { family: "Leila e família", name: "Isabela" },
+      { family: "Leila e família", name: "Leila" },
+      { family: "Leila e família", name: "Tião" },
+      { family: "Lene e família", name: "Lene" },
+      { family: "Lene e família", name: "Tio Willian" },
+      { family: "Liduína e família", name: "Liduína" },
+      { family: "Liduína e família", name: "Tião" },
+      { family: "Liduína e família", name: "Juninho" },
+      { family: "Liduína e família", name: "Aline" },
+      { family: "Liduína e família", name: "Silvana" },
+      { family: "Marcia e família", name: "Amanda" },
+      { family: "Marcia e família", name: "Fernanda" },
+      { family: "Marcia e família", name: "Geovana" },
+      { family: "Marcia e família", name: "Henrique" },
+      { family: "Marcia e família", name: "Marcia" },
+      { family: "Marcia e família", name: "Roni" },
+      { family: "Marley e família", name: "Marcio" },
+      { family: "Marley e família", name: "Marley" },
+      { family: "Marley e família", name: "Pedro" },
+      { family: "Marli e família", name: "Antônio" },
+      { family: "Marli e família", name: "Marli" },
+      { family: "Marli e família", name: "Pedro Paulo" },
+      { family: "Melina e família", name: "Bernardo" },
+      { family: "Melina e família", name: "Benício" },
+      { family: "Melina e família", name: "Diogo" },
+      { family: "Melina e família", name: "Melina" },
+      { family: "Michelle e família", name: "Gesivan" },
+      { family: "Michelle e família", name: "Lara" },
+      { family: "Michelle e família", name: "Michelle" },
+      { family: "Michelle e família", name: "Yasmim" },
+      { family: "Paulinha e família", name: "Antonela" },
+      { family: "Paulinha e família", name: "Laura" },
+      { family: "Paulinha e família", name: "Paulinha" },
+      { family: "Paulinha e família", name: "Roni" },
+      { family: "Pedro Procópio e família", name: "Bruna" },
+      { family: "Pedro Procópio e família", name: "Ítalo" },
+      { family: "Pedro Procópio e família", name: "Pedro" },
+      { family: "Pedro Procópio e família", name: "Titonha" },
+      { family: "Pedro Procópio e família", name: "Salvina" },
+      { family: "Priscila e família", name: "João" },
+      { family: "Priscila e família", name: "Kiko" },
+      { family: "Priscila e família", name: "Priscila" },
+      { family: "Rafael e Débora", name: "Rafael" },
+      { family: "Rafael e Débora", name: "Débora" },
+      { family: "Rita e família", name: "Rita" },
+      { family: "Rita e família", name: "Viola" },
+      { family: "Rita e família", name: "Júlia" },
+      { family: "Rita e família", name: "Gabriela" },
+      { family: "Rita e família", name: "Esposo da Gabi" },
+      { family: "Tiago e Família", name: "Filipe" },
+      { family: "Tiago e Família", name: "Jeniffer" },
+      { family: "Tiago e Família", name: "Luísa" },
+      { family: "Tiago e Família", name: "Tiago" },
+      { family: "Tiago macarrão e família", name: "Bárbara e o Bebê" },
+      { family: "Tiago macarrão e família", name: "Bernardo" },
+      { family: "Tiago macarrão e família", name: "Sarah" },
+      { family: "Tiago macarrão e família", name: "Tiago" },
+      { family: "Tiago SESI e família", name: "Tiago" },
+      { family: "Tiago SESI e família", name: "Larissa" },
+      { family: "Salvina e família", name: "Bruna" },
+      { family: "Salvina e família", name: "Ítalo" },
+      { family: "Salvina e família", name: "Pedro" },
+      { family: "Salvina e família", name: "Titonha" },
+      { family: "Salvina e família", name: "Salvina" },
+      { family: "Amigos da Julia", name: "Andrei" },
+      { family: "Amigos da Julia", name: "Ana Luiza" },
+      { family: "Amigos da Julia", name: "Sophia" },
+      { family: "Amigos da Julia", name: "Jane" },
+      { family: "Amigos da Julia", name: "Ana Clara" },
+      { family: "Amigos da Julia", name: "Filipe William" },
+      { family: "Amigos da Julia", name: "Isa Dora" },
+      { family: "Amigos da Julia", name: "Clara Fleury" },
+      { family: "Amigos da Julia", name: "Rafah" },
+      { family: "Amigos da Julia", name: "Gabi Souza" },
+      { family: "Amigos da Julia", name: "Gaby Cristina" },
+      { family: "Amigos da Julia", name: "Lara" },
+      { family: "Amigos da Julia", name: "Bella" },
+      { family: "Amigos da Julia", name: "Anna" },
+      { family: "Amigos da Julia", name: "Duda e Miguel" },
+      { family: "Amigos da Julia", name: "Mayana" },
+      { family: "Amigos da Julia", name: "Ana Maria" },
+      { family: "Amigos da Julia", name: "Rafa" },
+      { family: "Amigos da Julia", name: "Maria Eduarda Oliveira" },
+      { family: "Amigos da Julia", name: "Geovanna" },
+      { family: "Amigos da Julia", name: "Sarah" },
+      { family: "Amigos da Julia", name: "Samuel Aguiar" },
+      { family: "Amigos da Julia", name: "Pedro Aguiar" },
+      { family: "Amigos da Julia", name: "Pedro Henrique" },
+      { family: "Amigos da Julia", name: "Lucas Viana" },
+      { family: "Amigos da Julia", name: "Ícaro" },
+      { family: "Amigos da Julia", name: "Guilherme" },
+      { family: "Amigos da Julia", name: "Letícia" },
+      { family: "Amigos da Julia", name: "Rebeca" },
+      { family: "Amigos da Julia", name: "Eduardo Sousa" },
+      { family: "Amigos da Julia", name: "Geovanna Benevinuto" },
+      { family: "Amigos da Julia", name: "Laura Bicalho" },
+      { family: "Amigos da Julia", name: "Isabella de Oliveira" },
+      { family: "Amigos da Julia", name: "Giovanna Coutinho" },
+      { family: "Amigos da Julia", name: "Gabriel Carvalho" },
+      { family: "Amigos da Julia", name: "Viviane" },
+      { family: "Amigos da Julia", name: "Filipe de Paula" },
+      { family: "Amigos da Julia", name: "Arthur Fortes" },
+      { family: "Amigos da Julia", name: "Bianca" },
+      { family: "Amigos da Julia", name: "Victor" },
+      { family: "Amigos da Julia", name: "Mari" },
+      { family: "Amigos da Julia", name: "Enzo" },
+      { family: "Amigos da Julia", name: "Alessandra" },
+      { family: "Amigos da Julia", name: "Maria Gabriela" },
+      { family: "Amigos da Julia", name: "Joao Victor Ataíde" },
+      { family: "Amigos da Julia", name: "Isabella Brito" },
+      { family: "Amigos da Julia", name: "Julia Sousa" },
+      { family: "Amigos da Julia", name: "Matheus" },
+      { family: "Amigos da Julia", name: "Letícia" },
+      { family: "Amigos da Julia", name: "Bia Ariadne" },
+      { family: "Amigos da Julia", name: "Lucas Mendes" },
+      { family: "Amigos da Julia", name: "Fernanda Costa" },
+      { family: "Amigos da Julia", name: "Bruno Silva" },
+    ];
 
-        <details>
-            <summary>Dona Rosa e Waldenia</summary>
-            <div class="membro"><input type="checkbox" data-nome="Dona Rosa"><label>Dona Rosa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Waldenia"><label>Waldenia</label></div>
-        </details>
+    function sanitizeId(family, name){
+      const raw = (family + "__" + name).toLowerCase();
+      return raw.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9_]/g, "_");
+    }
+    function formatDate(ts){
+      const d = ts.toDate ? ts.toDate() : new Date(ts);
+      return d.toLocaleString();
+    }
 
-        <details>
-            <summary>Duda e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Ana Carolina"><label>Ana Carolina</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Duda"><label>Duda</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Fabiana Ariai"><label>Fabiana Ariai</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Maria Helena"><label>Maria Helena</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Maria Luiza"><label>Maria Luiza</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Petre Ariani"><label>Petre Ariani</label></div>
-        </details>
+    const $search = document.getElementById("search");
+    const $list = document.getElementById("list");
+    const $messageArea = document.getElementById("messageArea");
+    const $clearBtn = document.getElementById("clearBtn");
+    const $confirmBtn = document.getElementById("confirmBtn");
+    const $counter = document.getElementById("counter");
+    const $adminBtn = document.getElementById("adminBtn");
+    const $adminPass = document.getElementById("adminPass");
+    const $adminView = document.getElementById("adminView");
+    const $confirmedTableBody = document.querySelector("#confirmedTable tbody");
+    const $logoutAdmin = document.getElementById("logoutAdmin");
+    const $openConsoleBtn = document.getElementById("openConsoleBtn");
 
-        <details>
-            <summary>Elza e Zé</summary>
-            <div class="membro"><input type="checkbox" data-nome="Elza"><label>Elza</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Zé"><label>Zé</label></div>
-        </details>
+    const selectedPeople = new Map();
 
-        <details>
-            <summary>Eleida e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Cláudio"><label>Cláudio</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Eleida"><label>Eleida</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Sofhia"><label>Sofhia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Victória"><label>Victória</label></div>
-        </details>
+    $openConsoleBtn.addEventListener("click", ()=> {
+      const p = firebaseConfig.projectId;
+      if(!p){ alert("Coloque seu firebaseConfig no código primeiro."); return; }
+      const url = `https://console.firebase.google.com/project/${p}/firestore/data`;
+      window.open(url, "_blank");
+    });
 
-        <details>
-            <summary>Flávia e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Cibely"><label>Cibely</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Flávia"><label>Flávia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Giovana"><label>Giovana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Márcio"><label>Márcio</label></div>
-        </details>
+    function updateCounter(){
+      const count = selectedPeople.size;
+      if(count === 0){
+        $counter.textContent = "Nenhum nome selecionado";
+        $confirmBtn.disabled = true;
+      } else if(count === 1){
+        $counter.innerHTML = `<strong>1</strong> nome selecionado`;
+        $confirmBtn.disabled = false;
+      } else {
+        $counter.innerHTML = `<strong>${count}</strong> nomes selecionados`;
+        $confirmBtn.disabled = false;
+      }
+    }
 
-        <details>
-            <summary>Gabriel Gabigol</summary>
-            <div class="membro"><input type="checkbox" data-nome="Gabriel"><label>Gabriel</label></div>
-        </details>
+    function renderList(filter = ""){
+      $list.innerHTML = "";
+      const q = filter.trim().toLowerCase();
+      const filtered = people.filter(p => (p.name + " " + p.family).toLowerCase().includes(q));
+      if(filtered.length === 0){
+        $list.innerHTML = `<div class="small" style="padding:8px">Nenhum nome encontrado. Tente pesquisar por sobrenome ou família.</div>`;
+        return;
+      }
+      filtered.forEach(p => {
+        const id = sanitizeId(p.family, p.name);
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div>
+            <div><strong>${p.name}</strong></div>
+            <div class="meta">${p.family}</div>
+          </div>
+          <div class="confirmBox" id="cb_${id}">
+            <label class="small" id="status_${id}">carregando...</label>
+            <input type="checkbox" id="chk_${id}" style="width:20px;height:20px;border-radius:6px"/>
+          </div>
+        `;
+        $list.appendChild(item);
 
-        <details>
-            <summary>Glacélia e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Glacélia"><label>Glacélia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Guilherme"><label>Guilherme</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Wagner"><label>Wagner</label></div>
-        </details>
-
-        <details>
-            <summary>Jéssica e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Jéssica"><label>Jéssica</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rafael"><label>Rafael</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabi"><label>Gabi</label></div>
-        </details>
-
-        <details>
-            <summary>João Matheus e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="João"><label>João</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Letícia"><label>Letícia</label></div>
-        </details>
-
-        <details>
-            <summary>Joyce e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Joyce"><label>Joyce</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Diego"><label>Diego</label></div>
-            <div class="membro"><input type="checkbox" data-nome="João Pedro"><label>João Pedro</label></div>
-        </details>
-
-        <details>
-            <summary>Jeniffer e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Filipe"><label>Filipe</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Jeniffer"><label>Jeniffer</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Luísa"><label>Luísa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tiago"><label>Tiago</label></div>
-        </details>
-
-        <details>
-            <summary>Jucelina e Júlio</summary>
-            <div class="membro"><input type="checkbox" data-nome="Jucelina"><label>Jucelina</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Júlio"><label>Júlio</label></div>
-        </details>
-
-        <details>
-            <summary>Juliana e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Dimitri"><label>Dimitri</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Heitor"><label>Heitor</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Helena"><label>Helena</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Juliana"><label>Juliana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Panteles"><label>Panteles</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Marina"><label>Marina</label></div>
-        </details>
-
-        <details>
-            <summary>Karine e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Geraldinho"><label>Geraldinho</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gustavo"><label>Gustavo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Karine"><label>Karine</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Luísa"><label>Luísa</label></div>
-        </details>
-
-        <details>
-            <summary>Leidiane e Juju</summary>
-            <div class="membro"><input type="checkbox" data-nome="Juju"><label>Juju</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Leidiane"><label>Leidiane</label></div>
-        </details>
-
-        <details>
-            <summary>Leila e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Donizete"><label>Donizete</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Isabela"><label>Isabela</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Leila"><label>Leila</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tião"><label>Tião</label></div>
-        </details>
-
-        <details>
-            <summary>Lene e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Lene"><label>Lene</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tio Willian"><label>Tio Willian</label></div>
-        </details>
-
-        <details>
-            <summary>Liduína e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Liduína"><label>Liduína</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tião"><label>Tião</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Juninho"><label>Juninho</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Aline"><label>Aline</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Silvana"><label>Silvana</label></div>
-        </details>
-
-        <details>
-            <summary>Marcia e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Amanda"><label>Amanda</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Fernanda"><label>Fernanda</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Geovana"><label>Geovana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Henrique"><label>Henrique</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Marcia"><label>Marcia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Roni"><label>Roni</label></div>
-        </details>
-
-        <details>
-            <summary>Marley e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Marcio"><label>Marcio</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Marley"><label>Marley</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro"><label>Pedro</label></div>
-        </details>
-
-        <details>
-            <summary>Marli e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Antônio"><label>Antônio</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Marli"><label>Marli</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro Paulo"><label>Pedro Paulo</label></div>
-        </details>
-
-        <details>
-            <summary>Melina e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Bernardo"><label>Bernardo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Benício"><label>Benício</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Diogo"><label>Diogo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Melina"><label>Melina</label></div>
-        </details>
-
-        <details>
-            <summary>Michelle e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Gesivan"><label>Gesivan</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Lara"><label>Lara</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Michelle"><label>Michelle</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Yasmim"><label>Yasmim</label></div>
-        </details>
-
-        <details>
-            <summary>Paulinha e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Antonela"><label>Antonela</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Laura"><label>Laura</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Paulinha"><label>Paulinha</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Roni"><label>Roni</label></div>
-        </details>
-
-        <details>
-            <summary>Pedro Procópio e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Bruna"><label>Bruna</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ítalo"><label>Ítalo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro"><label>Pedro</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Titonha"><label>Titonha</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Salvina"><label>Salvina</label></div>
-        </details>
-
-        <details>
-            <summary>Priscila e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="João"><label>João</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Kiko"><label>Kiko</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Priscila"><label>Priscila</label></div>
-        </details>
-
-        <details>
-            <summary>Rafael e Débora</summary>
-            <div class="membro"><input type="checkbox" data-nome="Rafael"><label>Rafael</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Débora"><label>Débora</label></div>
-        </details>
-
-        <details>
-            <summary>Rita e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Rita"><label>Rita</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Viola"><label>Viola</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Júlia"><label>Júlia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabriela"><label>Gabriela</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Esposo da Gabi"><label>Esposo da Gabi</label></div>
-        </details>
-
-        <details>
-            <summary>Tiago e Família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Filipe"><label>Filipe</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Jeniffer"><label>Jeniffer</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Luísa"><label>Luísa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tiago"><label>Tiago</label></div>
-        </details>
-
-        <details>
-            <summary>Tiago macarrão e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Bárbara e o Bebê"><label>Bárbara e o Bebê</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Bernardo"><label>Bernardo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Sarah"><label>Sarah</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Tiago"><label>Tiago</label></div>
-        </details>
-
-        <details>
-            <summary>Tiago SESI e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Tiago"><label>Tiago</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Larissa"><label>Larissa</label></div>
-        </details>
-
-        <details>
-            <summary>Salvina e família</summary>
-            <div class="membro"><input type="checkbox" data-nome="Bruna"><label>Bruna</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ítalo"><label>Ítalo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro"><label>Pedro</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Titonha"><label>Titonha</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Salvina"><label>Salvina</label></div>
-        </details>
-
-        <details>
-            <summary>Amigos da Julia</summary>
-            <div class="membro"><input type="checkbox" data-nome="Andrei"><label>Andrei</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ana Luiza"><label>Ana Luiza</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Sophia"><label>Sophia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Jane"><label>Jane</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ana Clara"><label>Ana Clara</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Filipe William"><label>Filipe William</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Isa Dora"><label>Isa Dora</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Clara Fleury"><label>Clara Fleury</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rafah"><label>Rafah</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabi Souza"><label>Gabi Souza</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gaby Cristina"><label>Gaby Cristina</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Lara"><label>Lara</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Bella"><label>Bella</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Anna"><label>Anna</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Duda e Miguel"><label>Duda e Miguel</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Mayana"><label>Mayana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ana Maria"><label>Ana Maria</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rafa"><label>Rafa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Maria Eduarda Oliveira"><label>Maria Eduarda Oliveira</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Geovanna"><label>Geovanna</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Sarah"><label>Sarah</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Samuel Aguiar"><label>Samuel Aguiar</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro Aguiar"><label>Pedro Aguiar</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Pedro Henrique"><label>Pedro Henrique</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Lucas Viana"><label>Lucas Viana</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Ícaro"><label>Ícaro</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Guilherme"><label>Guilherme</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Letícia"><label>Letícia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Rebeca"><label>Rebeca</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Eduardo Sousa"><label>Eduardo Sousa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Geovanna Benevinuto"><label>Geovanna Benevinuto</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Laura Bicalho"><label>Laura Bicalho</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Isabella de Oliveira"><label>Isabella de Oliveira</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Giovanna Coutinho"><label>Giovanna Coutinho</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Gabriel Carvalho"><label>Gabriel Carvalho</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Viviane"><label>Viviane</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Filipe de Paula"><label>Filipe de Paula</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Arthur Fortes"><label>Arthur Fortes</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Bianca"><label>Bianca</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Victor"><label>Victor</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Mari"><label>Mari</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Enzo"><label>Enzo</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Alessandra"><label>Alessandra</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Maria Gabriela"><label>Maria Gabriela</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Joao Victor Ataíde"><label>Joao Victor Ataíde</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Isabella Brito"><label>Isabella Brito</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Julia Sousa"><label>Julia Sousa</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Matheus"><label>Matheus</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Letícia"><label>Letícia</label></div>
-            <div class="membro"><input type="checkbox" data-nome="Bia Ariadne"><label>Bia Ariadne</label></div>
-        </details>
-
-        <button id="confirm-button">Confirmar Presença</button>
-        <div id="visitor-count">Presenças que você está prestes a confirmar: <span id="count">0</span></div>
-    </div>
-
-    <script>
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const countDisplay = document.getElementById('count');
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                let count = 0;
-                checkboxes.forEach(cb => {
-                    if (cb.checked) count++;
-                });
-                countDisplay.textContent = count;
-            });
-        });
-
-        document.getElementById('confirm-button').addEventListener('click', async () => {
-            const confirmados = [];
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    confirmados.push(checkbox.getAttribute('data-nome'));
-                }
-            });
-
-            if (confirmados.length === 0) {
-                alert('Por favor, selecione pelo menos um nome.');
-                return;
-            }
-
-            const dados = {
-                Nome: confirmados.join(', '),
-                Confirmado: 'Sim'
-            };
-
-            const response = await fetch('https://script.google.com/macros/s/AKfycbwSEX4Mg243NnzdgFXMrLvSzU2cqbxUddZDWIYjV8SR9zKQhGYaCt7a5-HtAG_kYlKunQ/exec', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dados)
-            });
-
-            if (response.ok) {
-                alert('Sua confirmação foi enviada!');
-                checkboxes.forEach(cb => cb.checked = false);
-                countDisplay.textContent = '0';
+        (async ()=>{
+          try{
+            const dRef = doc(db, "confirmations", id);
+            const snap = await getDoc(dRef);
+            const cb = document.getElementById(`chk_${id}`);
+            const status = document.getElementById(`status_${id}`);
+            if(snap.exists()){
+              const data = snap.data();
+              status.textContent = "Presença confirmada";
+              status.className = "small";
+              cb.checked = true;
+              cb.disabled = true;
             } else {
-                alert('Erro ao enviar dados.');
+              status.textContent = "";
+              cb.checked = selectedPeople.has(id);
+              cb.disabled = false;
+              cb.addEventListener("change", (ev)=>{
+                if(ev.target.checked){
+                  selectedPeople.set(id, {name: p.name, family: p.family});
+                } else {
+                  selectedPeople.delete(id);
+                }
+                updateCounter();
+              });
             }
+          } catch(e){
+            console.error(e);
+            document.getElementById(`status_${id}`).textContent = "erro";
+          }
+        })();
+      });
+    }
+
+    $search.addEventListener("input", ()=> renderList($search.value));
+    $clearBtn.addEventListener("click", ()=> { $search.value = ""; renderList(); });
+
+    $confirmBtn.addEventListener("click", async ()=> {
+      if(selectedPeople.size === 0) return;
+      
+      $confirmBtn.disabled = true;
+      $confirmBtn.textContent = "Confirmando...";
+      
+      try{
+        const promises = [];
+        for(const [id, person] of selectedPeople){
+          const dRef = doc(db, "confirmations", id);
+          promises.push(
+            setDoc(dRef, {
+              name: person.name,
+              family: person.family,
+              confirmed: true,
+              ts: new Date()
+            })
+          );
+        }
+        
+        await Promise.all(promises);
+        
+        const count = selectedPeople.size;
+        selectedPeople.clear();
+        updateCounter();
+        
+        if(count === 1){
+          $messageArea.innerHTML = `<div class="msg">Presença confirmada! Obrigado 💖</div>`;
+        } else {
+          $messageArea.innerHTML = `<div class="msg">${count} presenças confirmadas! Obrigado 💖</div>`;
+        }
+        
+        setTimeout(()=> $messageArea.innerHTML = "", 4000);
+        renderList($search.value);
+        
+      } catch(err){
+        console.error(err);
+        alert("Erro ao confirmar presenças. Verifique se as regras do Firestore estão configuradas corretamente.");
+      } finally {
+        $confirmBtn.textContent = "Confirmar presença";
+        $confirmBtn.disabled = selectedPeople.size === 0;
+      }
+    });
+
+    let adminLogged = false;
+    $adminBtn.addEventListener("click", () => {
+      if($adminPass.value === ADMIN_PASSWORD){
+        adminLogged = true;
+        $adminView.style.display = "block";
+        $adminPass.value = "";
+        startAdminListener();
+      } else {
+        alert("Senha incorreta.");
+      }
+    });
+    $logoutAdmin.addEventListener("click", ()=>{
+      adminLogged = false;
+      $adminView.style.display = "none";
+      unsubscribeAdmin && unsubscribeAdmin();
+      $confirmedTableBody.innerHTML = "";
+    });
+
+    let unsubscribeAdmin = null;
+    function startAdminListener(){
+      const coll = collection(db, "confirmations");
+      const q = query(coll, orderBy("ts"));
+      unsubscribeAdmin = onSnapshot(q, (snap)=>{
+        $confirmedTableBody.innerHTML = "";
+        snap.forEach(docSnap => {
+          const d = docSnap.data();
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${escapeHtml(d.name)}</td><td>${escapeHtml(d.family)}</td><td>${formatDate(d.ts)}</td>`;
+          $confirmedTableBody.appendChild(tr);
         });
-    </script>
+      }, err => {
+        console.error("Erro admin listener", err);
+        alert("Erro ao conectar com Firestore. Confira o firebaseConfig e regras do Firestore.");
+      });
+    }
+
+    function escapeHtml(text){ return (text + "").replace(/[&<>"']/g, (m)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+    renderList();
+
+  </script>
 </body>
 </html>
