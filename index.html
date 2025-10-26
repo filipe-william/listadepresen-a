@@ -393,6 +393,7 @@
             const status = document.getElementById(`status_${id}`);
             if(snap.exists()){
               const data = snap.data();
+              status.textContent = ""
               status.className = "small";
               cb.checked = true;
               cb.disabled = true;
