@@ -424,7 +424,7 @@
     $confirmBtn.addEventListener("click", async ()=> {
       if(selectedPeople.size === 0) return;
       
-      $confirmBtn.disabled = true;
+      $confirmBtn.disabled = false;
       $confirmBtn.textContent = "Confirmando...";
       
       try{
