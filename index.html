@@ -314,9 +314,22 @@
       { family: "Amigos da Julia", name: "Lucas Mendes" },
       { family: "Amigos da Julia", name: "Fernanda Costa" },
       { family: "Amigos da Julia", name: "Bruno Silva" },
-    ];
+      { family: "Maria e familia", name: "Maria" },
+      { family: "Maria e familia", name: "Ricardo" },
+      { family: "Maria e familia", name: "Lorenzo" },
+      { family: "Maria e familia", name: "Vitor Hugo" },
+      { family: "Flávia e familia", name: "Flávia" },
+      { family: "Flávia e familia", name: "Márcio Filipe" },
+      { family: "Flávia e familia", name: "Gibi" },
+      { family: "Flávia e familia", name: "Cibely" },
+      { family: "Glacélia e familia", name: "Glacélia" },
+      { family: "Glacélia e familia", name: "Wagner" },
+      { family: "Glacélia e familia", name: "Guilherme Walace" },
+      { family: "Marta e familia", name: "Marta" },
+      { family: "Marta e familia", name: "Magelo" },
+      { family: "Marta e familia", name: "Breno" },
 
-    const confirmedIds = new Set(); // Adicione esta linha
+    ];
 
     function sanitizeId(family, name){
       const raw = (family + "__" + name).toLowerCase();
@@ -342,19 +355,19 @@
 
     const selectedPeople = new Map();
 
-    $openConsoleBtn.addEventListener("click", () => {
+    $openConsoleBtn.addEventListener("click", ()=> {
       const p = firebaseConfig.projectId;
-      if (!p) { alert("Coloque seu firebaseConfig no código primeiro."); return; }
+      if(!p){ alert("Coloque seu firebaseConfig no código primeiro."); return; }
       const url = `https://console.firebase.google.com/project/${p}/firestore/data`;
       window.open(url, "_blank");
     });
 
-    function updateCounter() {
+    function updateCounter(){
       const count = selectedPeople.size;
-      if (count === 0) {
+      if(count === 0){
         $counter.textContent = "Nenhum nome selecionado";
         $confirmBtn.disabled = true;
-      } else if (count === 1) {
+      } else if(count === 1){
         $counter.innerHTML = `<strong>1</strong> nome selecionado`;
         $confirmBtn.disabled = false;
       } else {
@@ -363,19 +376,14 @@
       }
     }
 
-    function renderList(filter = "") {
+    function renderList(filter = ""){
       $list.innerHTML = "";
       const q = filter.trim().toLowerCase();
-      const filtered = people.filter(p => {
-        const id = sanitizeId(p.family, p.name);
-        return (p.name + " " + p.family).toLowerCase().includes(q) && !confirmedIds.has(id);
-      });
-
-      if (filtered.length === 0) {
+      const filtered = people.filter(p => (p.name + " " + p.family).toLowerCase().includes(q));
+      if(filtered.length === 0){
         $list.innerHTML = `<div class="small" style="padding:8px">Nenhum nome encontrado. Tente pesquisar por sobrenome ou família.</div>`;
         return;
       }
-
       filtered.forEach(p => {
         const id = sanitizeId(p.family, p.name);
         const item = document.createElement("div");
@@ -392,29 +400,32 @@
         `;
         $list.appendChild(item);
 
-        (async () => {
-          try {
+        (async ()=>{
+          try{
             const dRef = doc(db, "confirmations", id);
             const snap = await getDoc(dRef);
             const cb = document.getElementById(`chk_${id}`);
             const status = document.getElementById(`status_${id}`);
-            if (snap.exists()) {
-              confirmedIds.add(id); // Adicione esta linha
-              renderList($search.value); // Atualize a lista
+            if(snap.exists()){
+              const data = snap.data();
+              status.textContent = ""
+              status.className = "small";
+              cb.checked = true;
+              cb.disabled = true;
             } else {
               status.textContent = "";
               cb.checked = selectedPeople.has(id);
               cb.disabled = false;
-              cb.addEventListener("change", (ev) => {
-                if (ev.target.checked) {
-                  selectedPeople.set(id, { name: p.name, family: p.family });
+              cb.addEventListener("change", (ev)=>{
+                if(ev.target.checked){
+                  selectedPeople.set(id, {name: p.name, family: p.family});
                 } else {
                   selectedPeople.delete(id);
                 }
                 updateCounter();
               });
             }
-          } catch (e) {
+          } catch(e){
             console.error(e);
             document.getElementById(`status_${id}`).textContent = "erro";
           }
@@ -422,18 +433,18 @@
       });
     }
 
-    $search.addEventListener("input", () => renderList($search.value));
-    $clearBtn.addEventListener("click", () => { $search.value = ""; renderList(); });
+    $search.addEventListener("input", ()=> renderList($search.value));
+    $clearBtn.addEventListener("click", ()=> { $search.value = ""; renderList(); });
 
-    $confirmBtn.addEventListener("click", async () => {
-      if (selectedPeople.size === 0) return;
-
+    $confirmBtn.addEventListener("click", async ()=> {
+      if(selectedPeople.size === 0) return;
+      
       $confirmBtn.disabled = true;
       $confirmBtn.textContent = "Confirmando...";
-
-      try {
+      
+      try{
         const promises = [];
-        for (const [id, person] of selectedPeople) {
+        for(const [id, person] of selectedPeople){
           const dRef = doc(db, "confirmations", id);
           promises.push(
             setDoc(dRef, {
@@ -441,26 +452,26 @@
               family: person.family,
               confirmed: true,
               ts: new Date()
-            }));
-          confirmedIds.add(id); // Adicione esta linha
+            })
+          );
         }
-
+        
         await Promise.all(promises);
-
+        
         const count = selectedPeople.size;
         selectedPeople.clear();
         updateCounter();
-
-        if (count === 1) {
+        
+        if(count === 1){
           $messageArea.innerHTML = `<div class="msg">Presença confirmada! Obrigado 💖</div>`;
         } else {
           $messageArea.innerHTML = `<div class="msg">${count} presenças confirmadas! Obrigado 💖</div>`;
         }
-
-        setTimeout(() => $messageArea.innerHTML = "", 4000);
-        renderList($search.value); // Atualiza a lista após confirmação
-
-      } catch (err) {
+        
+        setTimeout(()=> $messageArea.innerHTML = "", 4000);
+        renderList($search.value);
+        
+      } catch(err){
         console.error(err);
         alert("Erro ao confirmar presenças. Verifique se as regras do Firestore estão configuradas corretamente.");
       } finally {
@@ -471,7 +482,7 @@
 
     let adminLogged = false;
     $adminBtn.addEventListener("click", () => {
-      if ($adminPass.value === ADMIN_PASSWORD) {
+      if($adminPass.value === ADMIN_PASSWORD){
         adminLogged = true;
         $adminView.style.display = "block";
         $adminPass.value = "";
@@ -480,7 +491,7 @@
         alert("Senha incorreta.");
       }
     });
-    $logoutAdmin.addEventListener("click", () => {
+    $logoutAdmin.addEventListener("click", ()=>{
       adminLogged = false;
       $adminView.style.display = "none";
       unsubscribeAdmin && unsubscribeAdmin();
@@ -488,10 +499,10 @@
     });
 
     let unsubscribeAdmin = null;
-    function startAdminListener() {
+    function startAdminListener(){
       const coll = collection(db, "confirmations");
       const q = query(coll, orderBy("ts"));
-      unsubscribeAdmin = onSnapshot(q, (snap) => {
+      unsubscribeAdmin = onSnapshot(q, (snap)=>{
         $confirmedTableBody.innerHTML = "";
         snap.forEach(docSnap => {
           const d = docSnap.data();
@@ -505,15 +516,7 @@
       });
     }
 
-    function escapeHtml(text) { 
-      return (text + "").replace(/[&<>"']/g, (m) => ({
-        '&': '&amp;', 
-        '<': '&lt;', 
-        '>': '&gt;', 
-        '"': '&quot;', 
-        "'": '&#39;'
-      }[m])); 
-    }
+    function escapeHtml(text){ return (text + "").replace(/[&<>"']/g, (m)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
     renderList();
 
